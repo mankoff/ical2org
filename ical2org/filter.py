@@ -7,10 +7,12 @@
 """
 
 import datetime
+import dateutil
 import logging
 import sys
 
 import vobject
+import pytz
 
 from ical2org import tz
 
@@ -23,6 +25,15 @@ def by_date_range(events, start, end):
     local_end = end.astimezone(tz.local)
     log.debug('filtering between %s (%s) and %s (%s)', start, local_start, end, local_end)
     for event in events:
+        # Handle events in other timezones
+        if event.dtstart.params.get('X-VOBJ-ORIGINAL-TZID') != None:
+            event_tz = pytz.timezone(event.dtstart.params['X-VOBJ-ORIGINAL-TZID'][0])
+            # http://stackoverflow.com/questions/12659108/converting-an-ambigious-time-to-a-correct-local-time-with-python
+            local_tz = dateutil.tz.tzlocal()          
+            event_tz_aware = event_tz.localize(event.dtstart.value)
+            event.dtstart.value = event_tz_aware.astimezone(local_tz)
+            event_tz_aware = event_tz.localize(event.dtend.value)
+            event.dtend.value = event_tz_aware.astimezone(local_tz)
         log.debug('checking %s - %s == %s for %s',
                   event.dtstart.value,
                   event.dtend.value,

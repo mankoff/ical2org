@@ -121,7 +121,7 @@ def main(args=sys.argv[1:]):
                              type='choice',
                              choices=FORMATTER_FACTORIES.keys(),
                              default='org',
-                             help='Output format. One of %s. Defaults to "diary".' % FORMATTER_FACTORIES.keys(),
+                             help='Output format. One of %s. Defaults to "org".' % FORMATTER_FACTORIES.keys(),
                              )
     option_parser.add_option('--opt', '--formatter-option',
                              action='callback',

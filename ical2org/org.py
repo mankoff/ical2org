@@ -21,7 +21,7 @@ class OrgTreeFormatter(format.CalendarFormatter):
 
     def __init__(self, output, config, options):
         format.CalendarFormatter.__init__(self, output, config, options)
-        self.output.write('# -*- coding: utf-8 -*-\n')
+        self.output.write('# -*- coding: utf-8; eval: (auto-revert-mode 1); -*-\n')
         return
     
     def start_calendar(self, calendar):
@@ -86,9 +86,12 @@ class OrgTreeFormatter(format.CalendarFormatter):
             log.debug('partial day event')
             if day_span <= datetime.timedelta(1):
                 log.debug('single day')
-                # Single day, partial day event
-                time_range = '<%s-%s>' % (event_start.strftime('%Y-%m-%d %a %H:%M'),
-                                          event_end.strftime('%H:%M'))
+                if (event_end != event_start):
+                    # Single day, partial day event, different start/end time (timespan)
+                    time_range = '<%s-%s>' % (event_start.strftime('%Y-%m-%d %a %H:%M'),event_end.strftime('%H:%M'))
+                else:
+                    # Single day, same start/end time (timestamp)
+                    time_range = '<%s>' % (event_start.strftime('%Y-%m-%d %a %H:%M'))
             else:
                 # Multi-day, event at specific time
                 time_range = '<%s>--<%s>' % (event_start.strftime('%Y-%m-%d %a %H:%M'),

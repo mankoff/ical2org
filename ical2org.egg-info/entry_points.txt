@@ -1,3 +1,0 @@
-[console_scripts]
-ical2org = ical2org.app:main
-

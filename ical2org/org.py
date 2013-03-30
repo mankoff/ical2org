@@ -68,7 +68,9 @@ class OrgTreeFormatter(format.CalendarFormatter):
         # so we can tell if it is a single day or multi-day event.
         day_span = event_end_day - event_start_day
         log.debug('event_start %s', event_start)
+        log.debug('event_start_day %s', event_start_day)
         log.debug('event_end %s', event_end)
+        log.debug('event_end_day %s', event_end_day)
         log.debug('day_span %s', day_span)
 
         if not isinstance(event_start, datetime.datetime):
@@ -84,7 +86,8 @@ class OrgTreeFormatter(format.CalendarFormatter):
                                              event_end.strftime('%Y-%m-%d %a'))
         else:
             log.debug('partial day event')
-            if day_span <= datetime.timedelta(1):
+            # if day_span <= datetime.timedelta(1):
+            if event_start_day == event_end_day:
                 log.debug('single day')
                 if (event_end != event_start):
                     # Single day, partial day event, different start/end time (timespan)

@@ -1,11 +1,17 @@
-==========
- ical2org
-==========
+# ical2org
+
+## Fork
 
 This is a fork of http://www.doughellmann.com/projects/ical2org/ that
 was made to incorporate improvements for time zone (TZ) support.
 
-==========
+### License
+
+This code is not yet licensed here since there is no license on the
+original version: https://bitbucket.org/dhellmann/ical2org
+
+
+## About
 
 ical2org is a command line tool for exporting data from the Mac OS X
 application iCal so it can be used with the emacs tool `org-mode`_.
@@ -13,15 +19,13 @@ Data transfer is one-way only (from iCal to emacs), and is intended to
 be used to show alarms and scheduled events managed by iCal within
 org's agenda view.
 
-Installation
-============
+## Installation
 
 ical2org is distributed as a set of `Python`_ source files, and
 requires that Python already be installed.  The source distribution is
 created using `Distribute`_, which will be installed with ical2org.
 
-Quick Install
--------------
+### Quick Install
 
 Use normal Python application steps to install ical2org::
 
@@ -34,8 +38,7 @@ or::
 The other dependencies (`pytz`_ and `vobject`_) will be installed
 automatically.
 
-From Source
------------
+### From Source
 
 1. Download and install the dependencies.
 
@@ -57,8 +60,7 @@ From Source
    .. note:: Some systems may require super-user privileges to install.
 
 
-Generating org-mode Files
-=========================
+## Generating org-mode Files
 
 While ical2org supports multiple output formats, the default is an
 org-mode outline.  Each calendar entry includes the summary, location,
@@ -107,15 +109,13 @@ By default, ical2org processes all of the calendars which are
 displayed in iCal.  Hidden calendars are ignored unless you give their
 name on the command line.
 
-Generating Diary Files
-======================
+## Generating Diary Files
 
 The default output format uses org's outline structure.  If you would
 rather use emacs' diary-mode, use ``-f diary`` to switch modes.  The
 diary entries do not include the full text of the event.
 
-Recommended Use
-===============
+## Recommended Use
 
 The recommended way to use ical2org is to export your iCal data at
 least every day.  That gives you a moving window of fresh data, since
@@ -134,16 +134,14 @@ For example, you might run a command like::
 to export the data starting 30 days ago and ending 30 days from today
 to the file ``calendar.org``.
 
-Recurring Events
-================
+## Recurring Events
 
 Recurring events in iCal are "exploded" to create separate entries in
 the output.  This makes it easy to refile an event when you add notes,
 without having the notes from one meeting occurance appear on the
 wrong date.
 
-Command Line Options
-====================
+## Command Line Options
 
 -h                    show this help message and exit
 -c CONFIG_FILENAME, --config=CONFIG_FILENAME
@@ -178,8 +176,7 @@ Command Line Options
 
 .. _vobject: http://vobject.skyhouseconsulting.com/
 
-History
-=======
+## History
 
 1.2
 

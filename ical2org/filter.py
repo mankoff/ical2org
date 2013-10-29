@@ -102,6 +102,7 @@ def by_date_range(events, start, end):
                 exdates = []
                 for exdate in rruleset._exdate:
                     exdate = tz.assign_tz(exdate)
+                    exdates.append(exdate)
                 rruleset._exdate = exdates
             if hasattr(rruleset, '_tzinfo') and rruleset._tzinfo is None:
                 # if the ruleset doesn't have a time zone, give it

@@ -45,7 +45,9 @@ class OrgTreeFormatter(format.CalendarFormatter):
             category = self.config.get(calendar.title, 'category')
         except (ConfigParser.NoSectionError, ConfigParser.NoOptionError):
             category = calendar.title
+        self.output.write('  :PROPERTIES:\n')
         self.output.write('  :CATEGORY: %s\n' % category)
+        self.output.write('  :END:\n')
         return
 
     def format_event(self, event):

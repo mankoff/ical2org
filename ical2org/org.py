@@ -9,7 +9,7 @@
 import datetime
 import logging
 
-import ConfigParser
+import configparser
 
 from ical2org import format, tz
 
@@ -36,14 +36,14 @@ class OrgTreeFormatter(format.CalendarFormatter):
         try:
             tags = self.config.get(calendar.title, 'tags')
             tags = tags.strip(':')
-        except (ConfigParser.NoSectionError, ConfigParser.NoOptionError):
+        except (configparser.NoSectionError, configparser.NoOptionError):
             pass
         else:
             self.output.write('\t:%s:' % tags)
         self.output.write('\n')
         try:
             category = self.config.get(calendar.title, 'category')
-        except (ConfigParser.NoSectionError, ConfigParser.NoOptionError):
+        except (configparser.NoSectionError, configparser.NoOptionError):
             category = calendar.title
         self.output.write('  :PROPERTIES:\n')
         self.output.write('  :CATEGORY: %s\n' % category)

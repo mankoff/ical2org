@@ -6,7 +6,7 @@
 """
 
 import codecs
-from ConfigParser import SafeConfigParser as ConfigParser
+from configparser import SafeConfigParser as ConfigParser
 import datetime
 import inspect
 import logging
@@ -51,11 +51,11 @@ def remember_formatter_option(option, opt_str, value, parser):
 
 def show_verbose_help(option, opt_str, value, parser):
     parser.print_help()
-    print '\nFormatters:\n'
+    print('\nFormatters:\n')
     for name, formatter in sorted(FORMATTER_FACTORIES.items()):
-        print name
-        print '-' * len(name)
-        print inspect.getdoc(formatter)
+        print(name)
+        print('-' * len(name))
+        print(inspect.getdoc(formatter))
     parser.exit()
     return
 
@@ -119,9 +119,9 @@ def main(args=sys.argv[1:]):
                              action='store',
                              dest='format',
                              type='choice',
-                             choices=FORMATTER_FACTORIES.keys(),
+                             choices=list(FORMATTER_FACTORIES.keys()),
                              default='org',
-                             help='Output format. One of %s. Defaults to "org".' % FORMATTER_FACTORIES.keys(),
+                             help='Output format. One of %s. Defaults to "org".' % list(FORMATTER_FACTORIES.keys()),
                              )
     option_parser.add_option('--opt', '--formatter-option',
                              action='callback',
